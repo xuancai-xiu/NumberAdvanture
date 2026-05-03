@@ -13,7 +13,22 @@ public class LevelSelectManager : MonoBehaviour
         SceneManager.LoadScene("Level2");
     }
 
-    // Add more levels as needed
+    public void LoadLevel3()
+    {
+        SceneManager.LoadScene("Level3");
+    }
+
+    public void LoadLevel4()
+    {
+        SceneManager.LoadScene("Level4");
+    }
+
+    public void LoadLevel5()
+    {
+        SceneManager.LoadScene("Level5");
+    }
+
+    // add more in the future
 
     public void BackToMenu()
     {

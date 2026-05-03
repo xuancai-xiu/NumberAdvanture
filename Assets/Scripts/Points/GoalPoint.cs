@@ -7,7 +7,10 @@ public class GoalPoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Level1Manager levelManager = FindObjectOfType<Level1Manager>();
-            levelManager.LevelComplete();
+            if (levelManager != null)
+            {
+                levelManager.TryCompleteLevel();
+            }
         }
     }
 }

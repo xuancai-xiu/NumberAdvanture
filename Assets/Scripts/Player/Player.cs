@@ -10,6 +10,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Audio Settings")]
+    public AudioSource audioSource;       
+    public AudioClip jumpSound;           
+    public AudioClip deathSound;           
+
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private bool isGrounded;
@@ -69,6 +74,7 @@ public class Player : MonoBehaviour
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        audioSource.PlayOneShot(jumpSound);
     }
 
     private void RespawnEnded()
@@ -83,6 +89,7 @@ public class Player : MonoBehaviour
         die = true;
         rb.velocity = Vector2.zero;
         animator.SetTrigger("die");
+        audioSource.PlayOneShot(deathSound);
     }
 
     private void RestartLevel()
