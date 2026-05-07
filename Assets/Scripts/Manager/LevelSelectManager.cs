@@ -28,6 +28,11 @@ public class LevelSelectManager : MonoBehaviour
         SceneManager.LoadScene("Level5");
     }
 
+    public void LoadLevel6()
+    {
+        SceneManager.LoadScene("Level6");
+    }
+
     // add more in the future
 
     public void BackToMenu()

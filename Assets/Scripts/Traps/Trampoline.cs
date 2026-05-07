@@ -4,7 +4,9 @@ public class Trampoline : MonoBehaviour
 {
     [SerializeField] private float bounceForce = 15f;
     [SerializeField] private Animator animator;
-
+    [Header("Audio Settings")]
+    public AudioSource audioSource;
+    public AudioClip bounceSound;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -15,6 +17,7 @@ public class Trampoline : MonoBehaviour
             rb.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
 
             animator.SetTrigger("Bounce");
+            audioSource.PlayOneShot(bounceSound);
         }
     }
 }

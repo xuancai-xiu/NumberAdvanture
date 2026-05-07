@@ -13,7 +13,9 @@ public class Player : MonoBehaviour
     [Header("Audio Settings")]
     public AudioSource audioSource;       
     public AudioClip jumpSound;           
-    public AudioClip deathSound;           
+    public AudioClip deathSound;
+    public AudioClip reachEndSound;
+    public AudioClip errorSound;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
