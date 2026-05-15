@@ -33,11 +33,9 @@ public class Level1Manager : MonoBehaviour
 
     [Header("Fruit Legend Layout")]
     [SerializeField] private Vector2 fruitLegendItemSize = new Vector2(200, 200f);
-    [SerializeField] private Vector2 fruitIconSize = new Vector2(160f, 160f);
     [SerializeField] private float fruitValueFontSize = 60f;
 
     [Header("Formula Layout")]
-    [SerializeField] private Vector2 formulaItemSize = new Vector2(800f, 100f);
     [SerializeField] private float formulaFontSize = 60f;
 
     [Header("Formula Settings")]
@@ -137,15 +135,10 @@ public class Level1Manager : MonoBehaviour
             HorizontalLayoutGroup layout = legendItem.AddComponent<HorizontalLayoutGroup>();
             layout.childAlignment = TextAnchor.MiddleCenter;
             layout.spacing = 5;
-            layout.childForceExpandWidth = false;
-            layout.childForceExpandHeight = false;
 
             // 水果图标
             GameObject iconObj = new GameObject("Icon", typeof(RectTransform), typeof(Image));
             iconObj.transform.SetParent(legendItem.transform, false);
-            LayoutElement iconLayout = iconObj.AddComponent<LayoutElement>();
-            iconLayout.preferredWidth = fruitIconSize.x;
-            iconLayout.preferredHeight = fruitIconSize.y;
             Image icon = iconObj.GetComponent<Image>();
             icon.sprite = fruit.icon;
             icon.preserveAspect = true;
@@ -153,9 +146,6 @@ public class Level1Manager : MonoBehaviour
             // 水果数值文本
             GameObject valueObj = new GameObject("Value", typeof(RectTransform));
             valueObj.transform.SetParent(legendItem.transform, false);
-            LayoutElement valueLayout = valueObj.AddComponent<LayoutElement>();
-            valueLayout.preferredWidth = 40;
-            valueLayout.preferredHeight = 200;
             TextMeshProUGUI valueText = valueObj.AddComponent<TextMeshProUGUI>();
             valueText.text = fruit.dynamicValue.ToString();
             valueText.fontSize = fruitValueFontSize;
@@ -217,10 +207,6 @@ public class Level1Manager : MonoBehaviour
             formulaText.alignment = TextAlignmentOptions.Center;
             formulaText.color = Color.white;
             formula.uiText = formulaText;
-            LayoutElement layout = formulaItem.AddComponent<LayoutElement>();
-            layout.preferredWidth = formulaItemSize.x;
-            layout.preferredHeight = formulaItemSize.y;
-
             UpdateFormulaDisplay(formula);
         }
     }
@@ -336,13 +322,13 @@ public class Level1Manager : MonoBehaviour
         }
 
         // 打乱生成顺序，让正确答案和干扰项混在一起
-        //for (int i = 0; i < spawnPlan.Count; i++)
-        //{
-        //    int rand = Random.Range(i, spawnPlan.Count);
-        //    var temp = spawnPlan[i];
-        //    spawnPlan[i] = spawnPlan[rand];
-        //    spawnPlan[rand] = temp;
-        //}
+        for (int i = 0; i < spawnPlan.Count; i++)
+        {
+            int rand = Random.Range(i, spawnPlan.Count);
+            var temp = spawnPlan[i];
+            spawnPlan[i] = spawnPlan[rand];
+            spawnPlan[rand] = temp;
+        }
 
         // 实例化水果
         for (int i = 0; i < spawnPoints.Length && i < spawnPlan.Count; i++)
